@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{editing.task}"></title>
+</head>
+<body>
+
+<div th:insert="~{fragments :: header}"></div>
+
+<br/> <h2> <b th:text="#{editing.task}"></b> </h2> <br/>
+
+<form th:method="PUT" th:action="@{/tasks/{id}(id=${task.id})}" th:object="${task}">
+
+    <input type="hidden" th:field="*{dateOfCreation}">
+    <input type="hidden" th:field="*{isCompleted}">
+
+    <label for="description" th:text="#{enter.new.description.of.task}"></label>
+    <input type="text" th:field="*{description}" id="description"/>
+    <div style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"> task error </div>
+    <br/> <br/>
+
+    <label for="dueDate" th:text="#{enter.new.due.date}"></label>
+    <input type="date" th:field="*{dueDate}" id="dueDate"/>
+    <div style="color: red" th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}"> due date error </div>
+    <br/> <br/>
+
+    <button type="submit" th:text="#{edit.task}"></button>
+
+</form>
+
+</body>
+</html>

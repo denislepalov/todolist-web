@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{start.page}"></title>
+</head>
+<body>
+
+<div th:insert="~{fragments :: language}"></div> <br/><br/>
+
+<h1 th:text="#{welcome}"></h1>
+<br/><br/>
+
+<h2>
+<a href="/authenticate/registration" th:text="#{registration}"></a>
+<br/><br/>
+</h2>
+
+
+<h2>
+<a href="/authenticate/login" th:text="#{sign.in}"></a>
+</h2>
+
+
+</body>
+</html>

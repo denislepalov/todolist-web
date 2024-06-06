@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{user.information}"></title>
+</head>
+<body>
+
+<div th:insert="~{fragments :: header}"></div>
+
+<br/> <h2> <b th:text="#{user.information}"></b> </h2> <br/>
+
+<b th:text="#{id}"> id: </b>
+<span th:text="${user.id}"></span>
+<br/><br/>
+
+
+<b th:text="#{Username}"></b>
+<span th:text="${user.username}"></span>
+<br/><br/>
+
+
+<div th:if="${user.fullName == null || user.fullName.equals('')}">
+    <b th:text="#{full.name}"></b> <span th:text="#{is.not.set}"></span>
+    <br/><br/>
+</div>
+<div th:if="${user.fullName != null && !user.fullName.equals('')}">
+    <b th:text="#{full.name}"></b>
+    <span th:text="${user.fullName}"></span>
+    <br/><br/>
+</div>
+
+
+<div th:if="${user.dateOfBirth == null}">
+    <b th:text="#{date.of.birth}"></b> <span th:text="#{is.not.set}"></span>
+    <br/><br/>
+</div>
+<div th:if="${user.dateOfBirth != null}">
+    <b th:text="#{date.of.birth}"></b>
+    <span th:text="${user.dateOfBirth}"></span>
+    <br/><br/>
+</div>
+
+
+<b th:text="#{role}"></b>
+<span th:text="${user.role}"></span>
+<br/><br/>
+
+<b th:text="#{user.is.non.locked}"></b>
+<span th:text="${user.isNonLocked}"></span>
+<br/><br/><br/>
+
+
+<div th:if="${user.role.name().equals('USER')}">
+
+    <form th:method="GET" th:action="@{/admin/lock-user/{id}(id=${user.id})}">
+        <button type="submit" th:text="#{lock.user}"></button>
+    </form>
+    <br/>
+
+    <form th:method="GET" th:action="@{/admin/unlock-user/{id}(id=${user.id})}">
+        <button type="submit" th:text="#{unlock.user}"></button>
+    </form>
+    <br/>
+
+
+    <form th:method="DELETE" th:action="@{/admin/delete-user}" th:object="${utilObject}">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{flag}"/>
+
+        <button type="submit" th:text="#{delete.user}"></button>
+    </form>
+    <br/>
+</div>
+
+
+</body>
+</html>

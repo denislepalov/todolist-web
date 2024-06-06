@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{registration}"></title>
+</head>
+<body>
+
+<div th:insert="~{fragments :: language}"></div>
+
+<br/> <h2> <b th:text="#{registration}"></b> </h2> <br/>
+
+<form th:method="POST" th:action="@{/authenticate/registration}" enctype="multipart/form-data" th:object="${user}">
+
+    <label for="username" th:text="#{enter.username}"></label>
+    <input type="text" name="username" th:value="*{username}" id="username"/>
+    <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> </div>
+    <br/><br/>
+
+    <label for="dateOfBirth" th:text="#{enter.date.of.birth}"></label>
+    <input type="date" name="dateOfBirth" th:value="*{dateOfBirth}" id="dateOfBirth"/>
+    <div style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"> </div>
+    <br/><br/>
+
+    <label for="password" th:text="#{enter.password}"></label>
+    <input type="password" name="password" id="password"/>
+    <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> </div>
+    <br/><br/>
+
+    <label for="image" th:text="#{choose.avatar}"></label>
+    <input type="file" name="image" id="image"/>
+    <br/><br/>
+
+    <br/><br/>
+    <button type="submit" th:text="#{sign.up}"></button>
+
+</form>
+
+
+</body>
+</html>

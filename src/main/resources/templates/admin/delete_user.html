@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{deleting.user}"></title>
+</head>
+<body>
+
+
+
+<div th:if="${utilObject.flag.name().equals('TWO')}">
+
+    <div th:insert="~{fragments :: header}"></div>
+
+    <br/> <h2> <b th:text="#{deleting.user}"></b> </h2> <br/>
+
+    <form th:method="DELETE" th:action="@{/admin/delete-user}" th:object="${utilObject}">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{flag}"/>
+
+        <label for="password" th:text="#{enter.correct.password}"> </label>
+        <input type="password" th:field="*{password}" id="password"/>
+        <br/><br/>
+
+        <button type="submit" th:text="#{send}"> </button>
+    </form>
+</div>
+
+<div th:if="${utilObject.flag.name().equals('THREE')}">
+
+    <div th:insert="~{fragments :: header}"></div>
+
+    <br/> <h2> <b th:text="#{deleting.user}"></b> </h2> <br/>
+
+    <form th:method="DELETE" th:action="@{/admin/delete-user}" th:object="${utilObject}">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{flag}"/>
+
+        <br/>
+        <h2 th:text="#{warning.admin}"></h2>
+        <br/>
+
+        <button type="submit" th:text="#{yes}"> </button>
+    </form>
+</div>
+
+
+</body>
+</html>

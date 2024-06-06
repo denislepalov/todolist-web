@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{user.list}"></title>
+</head>
+<body>
+
+<div th:insert="~{fragments :: header}"></div> <br/><br/>
+
+    <form action="/admin/users">
+        <label for="username" th:text="#{Username}"></label>
+        <input type="text" name="username" th:value="${filter.username()}" id="username">
+
+        <label for="fullName" th:text="#{full.name}"></label>
+        <input type="text" name="fullName" th:value="${filter.fullName()}" id="fullName">
+
+        <label for="dateOfBirth" th:text="#{date.of.birth}"></label>
+        <input type="date" name="dateOfBirth" th:value="${filter.dateOfBirth()}" id="dateOfBirth">
+        <br/>
+        <span>
+            <label for="page" th:text="#{page}"></label>
+            <input type="number" name="page" th:value="${users.metadata.page}" id="page">
+
+            <label for="size" th:text="#{size}"></label>
+            <input type="number" name="size" th:value="${users.metadata.size}" id="size">
+        </span>
+        <button type="submit" th:text="#{filter}"></button>
+    </form>
+    <br/>
+
+    <h2> <b th:text="#{user.list}"></b> </h2>
+    <h4>
+        <div th:if="${!users.content.isEmpty()}">
+            <p th:each="user:${users.content}">
+                <a th:href="@{/admin/users/{id}(id=${user.id})}" th:text="${user.username}"></a>
+            </p>
+        </div>
+    </h4>
+
+</body>
+</html>

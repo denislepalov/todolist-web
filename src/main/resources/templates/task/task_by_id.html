@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{task.information}"></title>
+</head>
+<body>
+
+<div th:insert="~{fragments :: header}"></div>
+
+<br/> <h2> <b th:text="#{task.information}"></b> </h2> <br/>
+
+<b th:text="#{description}"></b>
+<span th:text="${task.description}"></span>
+<br/><br/>
+
+<b th:text="#{date.of.creation}"></b>
+<span th:text="${task.dateOfCreation}"></span>
+<br/><br/>
+
+
+<div th:if="${task.dueDate == null}">
+    <b th:text="#{due.date}"></b> <span th:text="#{is.not.set}"></span>
+    <br/><br/>
+</div>
+<div th:if="${task.dueDate != null}">
+    <b th:text="#{due.date}"></b>
+    <span th:text="${task.dueDate}"></span>
+    <br/><br/>
+</div>
+
+
+<b th:text="#{execution.mark}"></b>
+<span th:if="${task.isCompleted.equals('Not completed')}" th:text="#{not.completed}"></span>
+<span th:if="${task.isCompleted.equals('Completed')}" th:text="#{completed}"></span>
+<br/>
+
+
+
+<br/><hr/><br/>
+<form th:method="GET" th:action="@{/tasks/{id}/edit(id=${task.id})}">
+    <button type="submit" th:text="#{edit.task}"></button>
+</form>
+<br/>
+
+<form th:method="GET" th:action="@{/tasks/{id}/mark-as-completed(id=${task.id})}">
+    <button type="submit" th:text="#{mark.task.as.completed}"></button>
+</form>
+<br/>
+
+<form th:method="DELETE" th:action="@{/tasks/{id}(id=${task.id})}">
+    <button type="submit" th:text="#{delete.task}"></button>
+</form>
+
+</body>
+</html>

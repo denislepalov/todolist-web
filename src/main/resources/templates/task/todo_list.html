@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{task.list}"></title>
+</head>
+<body>
+
+
+<div th:insert="~{fragments :: language}"></div> <br/>
+<div th:insert="~{fragments :: header}"></div> <br/><br/>
+
+<form action="/tasks/todo-list">
+    <label for="dueDate" th:text="#{due.date}"></label>
+    <input type="date" name="dueDate" th:value="${filter.dueDate()}" id="dueDate">
+
+    <label for="isCompleted" th:text="#{is.completed}"></label>
+    <select name="isCompleted" id="isCompleted">
+        <option value="Not completed" th:text="#{not.completed}"></option>
+        <option value="Completed" th:text="#{completed}"></option>
+    </select>
+    <br/>
+    <span>
+        <label for="page" th:text="#{page}"></label>
+        <input type="number" name="page" th:value="${todoList.metadata.page}" id="page">
+
+        <label for="size" th:text="#{size}"></label>
+        <input type="number" name="size" th:value="${todoList.metadata.size}" id="size">
+    </span>
+    <button type="submit" th:text="#{filter}"></button>
+</form>
+<br/>
+
+<h2><b th:text="#{task.list}"></b></h2>
+<h4>
+    <div th:if="${!todoList.content.isEmpty()}">
+        <p th:each="task:${todoList.content}">
+            <a th:href="@{/tasks/{id}(id=${task.id})}" th:text="${task.description}"></a>
+            <span th:if="${task.isCompleted.equals('Not completed')}">
+                <span th:text="'| ' + #{not.completed}"></span>
+            </span>
+            <span th:if="${task.isCompleted.equals('Completed')}">
+                <span th:text="'| ' + #{completed}"></span>
+            </span>
+        </p>
+    </div>
+</h4>
+<br/><hr/><br/>
+<form th:method="GET" th:action="@{/tasks/new}">
+    <button type="submit" th:text="#{create.new.task}"></button>
+</form>
+<br/>
+
+<form th:method="GET" th:action="@{/user}">
+    <button type="submit" th:text="#{my.profile}"></button>
+</form>
+<br/>
+
+
+</body>
+</html>

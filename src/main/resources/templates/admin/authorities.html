@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{admin.authorities}"></title>
+</head>
+<body>
+
+<div th:insert="~{fragments :: header}"></div>
+
+
+<br/> <h2> <b th:text="#{admin.authorities}"></b> </h2> <br/>
+
+<h4> <a href="/admin/users" th:text="#{show.all.users}"> </a> </h4>
+
+<h4> <a href="/admin/tasks" th:text="#{show.all.tasks}"> </a> </h4>
+
+</body>
+</html>

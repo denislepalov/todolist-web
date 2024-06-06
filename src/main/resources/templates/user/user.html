@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{profile.information}"></title>
+</head>
+<body>
+
+<div th:insert="~{fragments :: header}"></div>
+
+<h2> <b th:text="#{profile.information}"></b> </h2>
+<br/><br/>
+
+<div th:if="${user.image}">
+    <img th:src="@{/user/{id}/avatar(id=${user.id})}" alt="avatar" >
+</div>
+
+<b th:text="#{Username}"></b>
+<span th:text="${user.username}"></span>
+<br/><br/>
+
+
+<div th:if="${user.fullName == null || user.fullName.equals('')}">
+    <b th:text="#{full.name}"></b> <span th:text="#{is.not.set}"></span>
+    <br/><br/>
+</div>
+<div th:if="${user.fullName != null && !user.fullName.equals('')}">
+    <b th:text="#{full.name}"></b>
+    <span th:text="${user.fullName}"></span>
+    <br/><br/>
+</div>
+
+
+<div th:if="${user.dateOfBirth == null}">
+    <b th:text="#{date.of.birth}"></b> <span th:text="#{is.not.set}"></span>
+    <br/><br/>
+</div>
+<div th:if="${user.dateOfBirth != null}">
+    <b th:text="#{date.of.birth}"></b>
+    <span th:text="${user.dateOfBirth}"></span>
+    <br/><br/>
+</div>
+<br/>
+
+<form th:method="GET" th:action="@{/user/edit}">
+    <button type="submit" th:text="#{edit.profile}"></button>
+</form>
+<br/>
+
+<form th:method="PUT" th:action="@{/user/edit-password}" th:object="${utilObject}">
+    <input type="hidden" th:field="*{id}"/>
+    <input type="hidden" th:field="*{flag}"/>
+    <button type="submit" th:text="#{edit.password}"></button>
+</form>
+<br/>
+
+<form th:method="DELETE" th:action="@{/user/delete-account}" th:object="${utilObject}">
+    <input type="hidden" th:field="*{id}"/>
+    <input type="hidden" th:field="*{flag}"/>
+    <button type="submit" th:text="#{delete.account}"></button>
+</form>
+
+
+<div th:if="${user.role.name().equals('ADMIN')}">
+    <br/><br/><br/>
+    <a href="/admin" th:text="#{admin.authorities}"></a>
+</div>
+
+</body>
+</html>
